@@ -1,2 +1,2 @@
-# flash-file
-LAN file transfer between PC and mobile
+# flash-files
+LAN files transfer between PC and mobile
