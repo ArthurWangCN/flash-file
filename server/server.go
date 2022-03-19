@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/ArthurWangCN/flash-files/server/controller"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,7 @@ func Run() {
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
 	staticFiles, _ := fs.Sub(FS, "frontend/dist")
+	router.POST("/api/v1/texts", controller.TextController)
 	router.StaticFS("/static", http.FS(staticFiles))
 	router.NoRoute(func(c *gin.Context) {
 		path := c.Request.URL.Path
