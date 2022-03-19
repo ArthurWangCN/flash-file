@@ -18,6 +18,7 @@ func Run() {
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
 	staticFiles, _ := fs.Sub(FS, "frontend/dist")
+	router.GET("/api/v1/addresses", controller.AddressesController)
 	router.POST("/api/v1/texts", controller.TextController)
 	router.StaticFS("/static", http.FS(staticFiles))
 	router.NoRoute(func(c *gin.Context) {
