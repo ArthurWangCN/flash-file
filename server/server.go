@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/ArthurWangCN/flash-files/config"
 	"github.com/ArthurWangCN/flash-files/server/controller"
 	"github.com/gin-gonic/gin"
 )
@@ -19,6 +20,7 @@ func Run() {
 	router := gin.Default()
 	staticFiles, _ := fs.Sub(FS, "frontend/dist")
 	router.GET("/api/v1/addresses", controller.AddressesController)
+	router.GET("/api/v1/qrcodes", controller.QrcodesController)
 	router.POST("/api/v1/texts", controller.TextController)
 	router.GET("/uploads/:path", controller.UploadsController)
 	router.StaticFS("/static", http.FS(staticFiles))
@@ -39,5 +41,5 @@ func Run() {
 			c.Status(http.StatusNotFound)
 		}
 	})
-	router.Run(":8080")
+	router.Run(":" + config.GetPort())
 }
