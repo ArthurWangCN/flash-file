@@ -22,6 +22,7 @@ func Run() {
 	router.GET("/api/v1/addresses", controller.AddressesController)
 	router.GET("/api/v1/qrcodes", controller.QrcodesController)
 	router.POST("/api/v1/texts", controller.TextController)
+	router.POST("/api/v1/files", controller.FilesController)
 	router.GET("/uploads/:path", controller.UploadsController)
 	router.StaticFS("/static", http.FS(staticFiles))
 	router.NoRoute(func(c *gin.Context) {
