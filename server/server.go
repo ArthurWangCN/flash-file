@@ -20,6 +20,7 @@ func Run() {
 	staticFiles, _ := fs.Sub(FS, "frontend/dist")
 	router.GET("/api/v1/addresses", controller.AddressesController)
 	router.POST("/api/v1/texts", controller.TextController)
+	router.GET("/uploads/:path", controller.UploadsController)
 	router.StaticFS("/static", http.FS(staticFiles))
 	router.NoRoute(func(c *gin.Context) {
 		path := c.Request.URL.Path
