@@ -9,6 +9,7 @@ import (
 
 	"github.com/ArthurWangCN/flash-files/config"
 	"github.com/ArthurWangCN/flash-files/server/controller"
+	"github.com/ArthurWangCN/flash-files/server/ws"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,9 +17,15 @@ import (
 var FS embed.FS
 
 func Run() {
+	hub := ws.NewHub()
+	go hub.Run()
+
 	gin.SetMode(gin.DebugMode)
 	router := gin.Default()
 	staticFiles, _ := fs.Sub(FS, "frontend/dist")
+	router.GET("/ws", func(c *gin.Context) {
+		ws.HttpController(c, hub)
+	})
 	router.GET("/api/v1/addresses", controller.AddressesController)
 	router.GET("/api/v1/qrcodes", controller.QrcodesController)
 	router.POST("/api/v1/texts", controller.TextController)
