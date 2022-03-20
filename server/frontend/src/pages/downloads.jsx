@@ -65,7 +65,7 @@ export const Downloads = () => {
   }
   return (
     <Layout>
-      <Header>同步传</Header>
+      <Header>闪电传</Header>
       {node}
       <Space x3 />
       <Center>
